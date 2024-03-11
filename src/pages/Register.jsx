@@ -11,6 +11,9 @@ export default function Register() {
     const handleSubmit = async e => {
         e.preventDefault()
         const user = await register(email, password)
+        navigate('/',{
+            replace: true
+        })
     }
     return (
         <div>

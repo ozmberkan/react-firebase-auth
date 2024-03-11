@@ -1,9 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
 import { login } from '../firebase'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { login as loginHandle } from '../store/auth'
 
-export default function Register() {
+export default function Login() {
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -11,6 +16,10 @@ export default function Register() {
     const handleSubmit = async e => {
         e.preventDefault()
         const user = await login(email, password)
+        dispatch(loginHandle(user))
+        navigate('/',{
+            replace: true
+        })
     }
     return (
         <div>
